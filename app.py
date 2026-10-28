@@ -8,8 +8,17 @@ init_db()
 
 st.set_page_config(page_title="AI 교육 앱", layout="wide")
 
+# 화면 스타일 (글꼴, 모서리)
+st.markdown("""
+<style>
+html, body, [class*="css"], p, label, div, input, button { font-family: Gulim, Dotum, "굴림", "돋움", sans-serif !important; }
+h1 { font-size: 24px !important; border-bottom: 2px solid #333; padding-bottom: 5px; }
+input, textarea, button, [data-baseweb="select"] > div, [data-testid="stForm"] { border-radius: 0 !important; }
+</style>
+""", unsafe_allow_html=True)
+
 # menu = ["Home", "Login", "SignUp", "설문참여",]
-menu = ["Home", "Login", "SignUp", "설문참여", "pythonid"]
+menu = ["Home", "Login", "SignUp", "설문참여", "pythonid", "블록리게임", "테트리스게임"]
 choice = st.sidebar.selectbox("Menu", menu)
 
 # 세션 상태 초기화 (로그인 관리)
@@ -55,18 +64,28 @@ elif choice == "Login":
                 st.error("ID 또는 비밀번호가 틀렸습니다.")
 
 elif choice == "pythonid":
-    st.title("📝 파이썬 학습")
+    st.title("파이썬 학습")
     components.html(
     # '<iframe style="border:1px #FFFFFF none" src="https://www.online-python.com/" title="iFrame" width="100%" height="600px" scrolling="no" frameborder="no" allow="fullscreen"></iframe>'
     # '<iframe style="border:1px #FFFFFF none" src="https://www.online-python.com/" title="iFrame" width="100%" height="100%" scrolling="no" frameborder="no" allow="fullscreen"></iframe>'
       '<iframe style="border:1px #FFFFFF none" src="https://www.online-python.com/" title="iFrame" width="100%" height="1800px" scrolling="yes" frameborder="no" allow="fullscreen"></iframe>', height=820
                    )
 
+# 블록리게임 메뉴 추가
+elif choice == "블록리게임":
+    st.title("블록리게임")
+    components.html('<iframe src="https://blockly.games/?lang=ko" width="100%" height="780" frameborder="1"></iframe>', height=800)
+
+# 테트리스게임 메뉴 추가
+elif choice == "테트리스게임":
+    st.title("테트리스게임")
+    components.html('<iframe src="https://play.tetris.com/" width="100%" height="780" frameborder="1"></iframe>', height=800)
+
 elif choice == "설문참여":
-    st.title("📝 AI의 교육적 효과에 대한 인식 설문조사")
-    
+    st.title("AI의 교육적 효과에 대한 인식 설문조사")
+
     # 탭 생성
-    tab1, tab2 = st.tabs(["📋 설문응시", "📊 설문결과 시각화"])
+    tab1, tab2 = st.tabs(["설문응시", "설문결과 시각화"])
     
     # 설문 문항 및 척도 정의
     questions = [
